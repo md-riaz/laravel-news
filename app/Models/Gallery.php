@@ -13,6 +13,7 @@ class Gallery extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\GalleryFactory> */
     use HasFactory;
+
     use HasSlug;
     use InteractsWithMedia;
 
