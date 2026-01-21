@@ -6,6 +6,15 @@ This document tracks implementation progress and sequencing for foundational fea
 
 Focus on Phase 1 (Core Domain Modeling) with the earliest shared dependencies landing first. Subsequent phases should build on the completed data models.
 
+Phase tracking files:
+
+- [Phase 0](phase-0-tracking.md)
+- [Phase 1](phase-1-tracking.md)
+- [Phase 2](phase-2-tracking.md)
+- [Phase 3](phase-3-tracking.md)
+- [Phase 4](phase-4-tracking.md)
+- [Phase 5](phase-5-tracking.md)
+
 ## Ordered Implementation Sequence
 
 1. **Taxonomy foundation (Categories & Tags)**
