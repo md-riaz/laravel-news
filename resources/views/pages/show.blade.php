@@ -15,7 +15,7 @@
         </div>
 
         <div class="prose max-w-none">
-            {!! nl2br(e($page->body)) !!}
+            {{ $page->body_html }}
         </div>
     </div>
 @endsection

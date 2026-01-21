@@ -15,7 +15,7 @@ class TagController extends Controller
             ->firstOrFail();
 
         $articles = $tag->articles()
-            ->with(['category', 'reporter', 'tags'])
+            ->with(['category', 'reporter'])
             ->published()
             ->latest('published_at')
             ->paginate(12);

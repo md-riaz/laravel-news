@@ -15,10 +15,14 @@ class ReporterController extends Controller
             ->firstOrFail();
 
         $articles = $reporter->articles()
-            ->with(['category', 'reporter', 'tags'])
+            ->with(['category'])
             ->published()
             ->latest('published_at')
             ->paginate(12);
+
+        $articles->getCollection()->each(function ($article) use ($reporter): void {
+            $article->setRelation('reporter', $reporter);
+        });
 
         return view('reporters.show', [
             'reporter' => $reporter,

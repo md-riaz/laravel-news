@@ -15,7 +15,7 @@ class CategoryController extends Controller
             ->firstOrFail();
 
         $articles = $category->articles()
-            ->with(['category', 'reporter', 'tags'])
+            ->with(['reporter'])
             ->published()
             ->latest('published_at')
             ->paginate(12);
