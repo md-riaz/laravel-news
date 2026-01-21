@@ -2,6 +2,8 @@
 
 This plan translates the project specification into a multi‑agent execution strategy. Each agent owns a discrete slice of the system, with clear handoffs, dependencies, and acceptance checks.
 
+For current status and sequencing, see [Feature Tracking Plan](feature-tracking.md).
+
 ## 1. Project Phases
 
 ### Phase 0 — Repository Bootstrap
