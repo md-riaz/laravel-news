@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    // Suppress model events so default seed data doesn't trigger observers during setup.
     use WithoutModelEvents;
 
     /**
