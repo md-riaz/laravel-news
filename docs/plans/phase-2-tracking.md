@@ -8,4 +8,5 @@
 
 ## Status
 
-- **Overall:** ⏳ Planned.
+- **Overall:** 🚧 In progress.
+- **Completed:** Category and Tag Filament resources.
