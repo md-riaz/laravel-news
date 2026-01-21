@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\PageStatus;
 use App\Models\Concerns\HasSlug;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,6 +32,14 @@ class Page extends Model
         'published_at' => 'datetime',
         'status' => PageStatus::class,
     ];
+
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query
+            ->where('status', PageStatus::PUBLISHED)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now());
+    }
 
     protected function getSlugSourceField(): string
     {

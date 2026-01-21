@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Public;
 
-use App\Enums\PageStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Page;
 use Illuminate\View\View;
@@ -13,9 +12,7 @@ class PageController extends Controller
     {
         $page = Page::query()
             ->where('slug', $slug)
-            ->where('status', PageStatus::PUBLISHED)
-            ->whereNotNull('published_at')
-            ->where('published_at', '<=', now())
+            ->published()
             ->firstOrFail();
 
         return view('pages.show', [

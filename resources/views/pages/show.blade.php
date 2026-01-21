@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title', $page->title)
+@section('meta_description', \Illuminate\Support\Str::limit(strip_tags($page->body ?? ''), 160))
+
 @section('content')
     <div class="flex flex-col gap-6">
         <div>

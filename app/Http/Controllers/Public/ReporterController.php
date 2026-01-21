@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Public;
 
-use App\Enums\ArticleStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Reporter;
 use Illuminate\View\View;
@@ -17,9 +16,7 @@ class ReporterController extends Controller
 
         $articles = $reporter->articles()
             ->with(['category', 'reporter', 'tags'])
-            ->where('status', ArticleStatus::PUBLISHED)
-            ->whereNotNull('published_at')
-            ->where('published_at', '<=', now())
+            ->published()
             ->latest('published_at')
             ->paginate(12);
 
