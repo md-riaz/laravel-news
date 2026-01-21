@@ -2,6 +2,9 @@
 
 @section('title', $article->headline)
 @section('meta_description', $article->excerpt ?? \Illuminate\Support\Str::limit(strip_tags($article->body ?? ''), 160))
+@section('canonical', route('articles.show', $article->slug))
+@section('og_type', 'article')
+@section('published_time', optional($article->published_at)->toAtomString())
 
 @section('content')
     <div class="flex flex-col gap-6">

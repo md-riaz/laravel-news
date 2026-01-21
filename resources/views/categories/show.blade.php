@@ -2,6 +2,7 @@
 
 @section('title', $category->name)
 @section('meta_description', "Browse the latest articles in {$category->name}.")
+@section('canonical', route('categories.show', $category->slug))
 
 @section('content')
     <div class="flex flex-col gap-6">

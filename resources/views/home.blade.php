@@ -2,6 +2,7 @@
 
 @section('title', 'Latest Articles')
 @section('meta_description', 'Catch up on the most recent stories from the Laravel community.')
+@section('canonical', route('home'))
 
 @section('content')
     <div class="flex flex-col gap-6">

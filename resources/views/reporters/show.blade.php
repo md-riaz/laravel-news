@@ -2,6 +2,7 @@
 
 @section('title', $reporter->name)
 @section('meta_description', "Articles written by {$reporter->name}.")
+@section('canonical', route('reporters.show', $reporter->slug))
 
 @section('content')
     <div class="flex flex-col gap-6">

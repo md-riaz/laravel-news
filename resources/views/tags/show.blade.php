@@ -2,6 +2,7 @@
 
 @section('title', "Tag: {$tag->name}")
 @section('meta_description', "Stories tagged with {$tag->name}.")
+@section('canonical', route('tags.show', $tag->slug))
 
 @section('content')
     <div class="flex flex-col gap-6">

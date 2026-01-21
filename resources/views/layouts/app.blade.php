@@ -9,6 +9,15 @@
         <meta name="description" content="@yield('meta_description', 'Latest coverage of the Laravel ecosystem.')">
         <meta property="og:title" content="@yield('title', 'Laravel News')">
         <meta property="og:description" content="@yield('meta_description', 'Latest coverage of the Laravel ecosystem.')">
+        <meta property="og:type" content="@yield('og_type', 'website')">
+        <meta property="og:site_name" content="Laravel News">
+        @hasSection('canonical')
+            <link rel="canonical" href="@yield('canonical')">
+            <meta property="og:url" content="@yield('canonical')">
+        @endhasSection
+        @hasSection('published_time')
+            <meta property="article:published_time" content="@yield('published_time')">
+        @endhasSection
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
