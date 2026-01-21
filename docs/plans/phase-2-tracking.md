@@ -8,5 +8,5 @@
 
 ## Status
 
-- **Overall:** 🚧 In progress.
-- **Completed:** Category, Tag, and Reporter Filament resources.
+- **Overall:** ✅ Complete.
+- **Completed:** Category, Tag, Reporter, Article, Page, Gallery, and Video Filament resources.
