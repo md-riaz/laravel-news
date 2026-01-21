@@ -16,6 +16,7 @@ class Article extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\ArticleFactory> */
     use HasFactory;
+
     use HasSlug;
     use InteractsWithMedia;
 
