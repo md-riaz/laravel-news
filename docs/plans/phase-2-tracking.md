@@ -9,4 +9,4 @@
 ## Status
 
 - **Overall:** 🚧 In progress.
-- **Completed:** Category and Tag Filament resources.
+- **Completed:** Category, Tag, and Reporter Filament resources.
