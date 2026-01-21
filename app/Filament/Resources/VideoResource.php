@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\VideoStatus;
 use App\Filament\Resources\VideoResource\Pages;
 use App\Models\Video;
 use Filament\Forms;
@@ -37,11 +38,8 @@ class VideoResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('status')
-                    ->options([
-                        'draft' => 'Draft',
-                        'published' => 'Published',
-                    ])
-                    ->default('draft')
+                    ->options(VideoStatus::options())
+                    ->default(VideoStatus::DRAFT->value)
                     ->required(),
                 Forms\Components\DateTimePicker::make('published_at'),
             ]);

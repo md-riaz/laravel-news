@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Category extends Model
 {
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
+    use HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -22,12 +23,8 @@ class Category extends Model
         'sort_order',
     ];
 
-    protected static function booted(): void
+    protected function getSlugSourceField(): string
     {
-        static::saving(function (Category $category): void {
-            if (! $category->slug && $category->name) {
-                $category->slug = Str::slug($category->name);
-            }
-        });
+        return 'name';
     }
 }

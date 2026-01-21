@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\GalleryStatus;
+use App\Models\Concerns\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -12,6 +13,7 @@ class Gallery extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\GalleryFactory> */
     use HasFactory;
+    use HasSlug;
     use InteractsWithMedia;
 
     /**
@@ -29,15 +31,12 @@ class Gallery extends Model implements HasMedia
 
     protected $casts = [
         'published_at' => 'datetime',
+        'status' => GalleryStatus::class,
     ];
 
-    protected static function booted(): void
+    protected function getSlugSourceField(): string
     {
-        static::saving(function (Gallery $gallery): void {
-            if (! $gallery->slug && $gallery->title) {
-                $gallery->slug = Str::slug($gallery->title);
-            }
-        });
+        return 'title';
     }
 
     public function registerMediaCollections(): void

@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('embed_url');
-            $table->string('status')->default('draft');
+            $table->string('status', 20)->default('draft');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

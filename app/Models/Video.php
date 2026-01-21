@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use App\Enums\VideoStatus;
+use App\Models\Concerns\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Video extends Model
 {
     /** @use HasFactory<\Database\Factories\VideoFactory> */
     use HasFactory;
+    use HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -27,14 +29,11 @@ class Video extends Model
 
     protected $casts = [
         'published_at' => 'datetime',
+        'status' => VideoStatus::class,
     ];
 
-    protected static function booted(): void
+    protected function getSlugSourceField(): string
     {
-        static::saving(function (Video $video): void {
-            if (! $video->slug && $video->title) {
-                $video->slug = Str::slug($video->title);
-            }
-        });
+        return 'title';
     }
 }

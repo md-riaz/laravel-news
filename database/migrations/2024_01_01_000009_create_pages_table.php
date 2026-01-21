@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('body')->nullable();
-            $table->string('status')->default('draft');
+            $table->string('status', 20)->default('draft');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

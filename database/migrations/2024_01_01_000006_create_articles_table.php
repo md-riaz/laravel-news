@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('excerpt')->nullable();
             $table->longText('body')->nullable();
-            $table->string('status')->default('draft');
+            $table->string('status', 20)->default('draft');
             $table->timestamp('published_at')->nullable();
             $table->timestamp('scheduled_for')->nullable();
             $table->boolean('is_featured')->default(false);

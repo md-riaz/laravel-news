@@ -2,10 +2,9 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ArticleStatus;
 use App\Filament\Resources\ArticleResource\Pages;
 use App\Models\Article;
-use App\Models\Category;
-use App\Models\Reporter;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -26,12 +25,12 @@ class ArticleResource extends Resource
             ->schema([
                 Forms\Components\Select::make('category_id')
                     ->label('Category')
-                    ->options(Category::query()->orderBy('name')->pluck('name', 'id'))
+                    ->relationship('category', 'name')
                     ->searchable()
                     ->required(),
                 Forms\Components\Select::make('reporter_id')
                     ->label('Reporter')
-                    ->options(Reporter::query()->orderBy('name')->pluck('name', 'id'))
+                    ->relationship('reporter', 'name')
                     ->searchable(),
                 Forms\Components\TextInput::make('headline')
                     ->required()
@@ -45,13 +44,8 @@ class ArticleResource extends Resource
                 Forms\Components\RichEditor::make('body')
                     ->columnSpanFull(),
                 Forms\Components\Select::make('status')
-                    ->options([
-                        'draft' => 'Draft',
-                        'scheduled' => 'Scheduled',
-                        'published' => 'Published',
-                        'archived' => 'Archived',
-                    ])
-                    ->default('draft')
+                    ->options(ArticleStatus::options())
+                    ->default(ArticleStatus::DRAFT->value)
                     ->required(),
                 Forms\Components\DateTimePicker::make('scheduled_for'),
                 Forms\Components\DateTimePicker::make('published_at'),

@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Tag extends Model
 {
     /** @use HasFactory<\Database\Factories\TagFactory> */
     use HasFactory;
+    use HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -21,12 +22,8 @@ class Tag extends Model
         'slug',
     ];
 
-    protected static function booted(): void
+    protected function getSlugSourceField(): string
     {
-        static::saving(function (Tag $tag): void {
-            if (! $tag->slug && $tag->name) {
-                $tag->slug = Str::slug($tag->name);
-            }
-        });
+        return 'name';
     }
 }

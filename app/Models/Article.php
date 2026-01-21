@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\ArticleStatus;
+use App\Models\Concerns\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -15,6 +16,7 @@ class Article extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\ArticleFactory> */
     use HasFactory;
+    use HasSlug;
     use InteractsWithMedia;
 
     /**
@@ -41,6 +43,7 @@ class Article extends Model implements HasMedia
         'scheduled_for' => 'datetime',
         'is_featured' => 'boolean',
         'is_breaking' => 'boolean',
+        'status' => ArticleStatus::class,
     ];
 
     public function category(): BelongsTo
@@ -58,13 +61,9 @@ class Article extends Model implements HasMedia
         return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 
-    protected static function booted(): void
+    protected function getSlugSourceField(): string
     {
-        static::saving(function (Article $article): void {
-            if (! $article->slug && $article->headline) {
-                $article->slug = Str::slug($article->headline);
-            }
-        });
+        return 'headline';
     }
 
     public function registerMediaCollections(): void

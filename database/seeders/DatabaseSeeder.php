@@ -36,8 +36,10 @@ class DatabaseSeeder extends Seeder
         Gallery::factory(2)->create();
         Video::factory(3)->create();
 
-        Article::factory(6)->create()->each(function (Article $article): void {
-            $article->tags()->attach(Tag::inRandomOrder()->limit(2)->pluck('id'));
+        $tagIds = Tag::pluck('id');
+
+        Article::factory(6)->create()->each(function (Article $article) use ($tagIds): void {
+            $article->tags()->attach($tagIds->random(2));
         });
     }
 }

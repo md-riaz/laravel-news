@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Str;
 
 class Reporter extends Model
 {
     /** @use HasFactory<\Database\Factories\ReporterFactory> */
     use HasFactory;
+    use HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -30,12 +31,8 @@ class Reporter extends Model
         return $this->belongsTo(User::class);
     }
 
-    protected static function booted(): void
+    protected function getSlugSourceField(): string
     {
-        static::saving(function (Reporter $reporter): void {
-            if (! $reporter->slug && $reporter->name) {
-                $reporter->slug = Str::slug($reporter->name);
-            }
-        });
+        return 'name';
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\PageStatus;
 use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
 use Filament\Forms;
@@ -31,11 +32,8 @@ class PageResource extends Resource
                 Forms\Components\RichEditor::make('body')
                     ->columnSpanFull(),
                 Forms\Components\Select::make('status')
-                    ->options([
-                        'draft' => 'Draft',
-                        'published' => 'Published',
-                    ])
-                    ->default('draft')
+                    ->options(PageStatus::options())
+                    ->default(PageStatus::DRAFT->value)
                     ->required(),
                 Forms\Components\DateTimePicker::make('published_at'),
             ]);

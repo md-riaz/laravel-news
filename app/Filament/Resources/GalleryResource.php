@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\GalleryStatus;
 use App\Filament\Resources\GalleryResource\Pages;
 use App\Models\Gallery;
 use Filament\Forms;
@@ -32,11 +33,8 @@ class GalleryResource extends Resource
                     ->rows(3)
                     ->columnSpanFull(),
                 Forms\Components\Select::make('status')
-                    ->options([
-                        'draft' => 'Draft',
-                        'published' => 'Published',
-                    ])
-                    ->default('draft')
+                    ->options(GalleryStatus::options())
+                    ->default(GalleryStatus::DRAFT->value)
                     ->required(),
                 Forms\Components\DateTimePicker::make('published_at'),
             ]);
